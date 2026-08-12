@@ -1,4 +1,4 @@
-操作系统：Windows11、macOS或主流64位Linux。
+操作系统： Windows11、macOS或主流64位Linux。
 
 主软件使用支持窗口函数和公共表表达式的SQLite3.40或更高版本，由sqlite3命令行完成数据处理和CSV导出。PowerShell7或更高版本负责读取规则、复制源库、传入策略值并调用SQLite，无需第三方扩展。
 
