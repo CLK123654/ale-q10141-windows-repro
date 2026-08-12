@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "skill": "humanizer-zh",
+  "result": "PASS",
+  "reviewed_scopes": [
+    "任务名称",
+    "任务概要",
+    "任务prompt",
+    "关键动作",
+    "评分表",
+    "环境依赖",
+    "软件步骤",
+    "输入材料中的自然语言",
+    "标准交付中的用户可见文字",
+    "关键标准答案工作簿全部自然语言",
+    "任务规格工作簿全部自然语言"
+  ],
+  "scores": {
+    "直接性": 10,
+    "节奏": 9,
+    "信任度": 10,
+    "真实性": 9,
+    "精炼度": 9,
+    "total": 47
+  },
+  "minimum_total": 45,
+  "notes": [
+    "用增长周会的扩量决策开场，交代三类报表的实际使用者，不把制题门禁写成业务要求。",
+    "曝光去重、互斥污染、窗口归因和报表布局均来自可见输入，没有使用模糊引用或无来源阈值。",
+    "候选人可见内容只保留实验归因工作，不包含运行验收、样本变更和错误输入编排。",
+    "评分表只说明输入规则、业务主键、字段、容差和复算关系，精确样本答案保存在五页标答。",
+    "段落随背景、规则和交付自然展开，已消除宣传腔、机械三段式、否定式排比、填充词和自动判卷口吻。"
+  ],
+  "online_ai_detection_used_as_conclusion": false,
+  "reviewed_artifacts_sha256": {
+    "任务名称.txt": "61c5f334f3cbe191691c1cd61802640be3141a466ee09dd1e848f97a4f740a70",
+    "任务概要.txt": "99dd6ed3c8af6e306ed93fab59d819dec8ff80a51b7a3641b84da25df2e27005",
+    "任务prompt.txt": "6ca377f38adfff997ae95a6a982573926d6534663e165a59b6aabbbe5e775c48",
+    "关键动作.txt": "c883226b64032e45f89bc67a3cf016572ed954ab3ddb5220cb2d85f341e8a69a",
+    "评分表.txt": "a7bd51e44bb4c3a90f11d2b856ec572b3cf905903f137075e021b9ea6b2c50f9",
+    "环境依赖.txt": "1562bb344fbad6fb1606f8feb6c77776384f6d92e372569022f002d8e2c4484f",
+    "相关专业软件的关键步骤.txt": "d964f34e3225cb86ef6dbd77678057af66437d5aa30825e3388dc18cee0caacb",
+    "task_fields.json": "8240dfa26c9cb27056913d3202b83497ad515b927cab052e5938af42c3282296",
+    "输入数据包.zip": "f1c73fb6d5907c5fb7bc5106630617d03e4d0cbffd20d80e28a0aad35d45e879",
+    "reference.zip": "8b1031cb557415ee022479490893c93cbdd40bd70476fbffc192ebdff6375f42",
+    "关键标准答案.xlsx": "146bf2664f62804a2d678a3f12c4bf2b715154cdf396485b5ba5caddb5042c68",
+    "任务规格转化.xlsx": "63e27af06a7d9746930e3bba7f34f1e2f020b9ba14a999e2041f464ef46f466b",
+    "ALE-专家数据作业表.csv": "4f229932dfa49e07464a7fbdc674bb6a5a76136644689176903d513d27ad7f82"
+  }
+}
