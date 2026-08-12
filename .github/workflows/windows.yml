@@ -44,6 +44,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: q10141-windows-evidence
-          path: verification/evidence/windows-verification.json
+          path: verification/evidence/
           if-no-files-found: error
           retention-days: 1
