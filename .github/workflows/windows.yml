@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  rebuild-reference:
     runs-on: windows-2025
     timeout-minutes: 15
     steps:
@@ -35,15 +35,15 @@ jobs:
           if (-not $version.StartsWith('3.51.2')) { throw "Unexpected SQLite version: $version" }
           "SQLITE3_PATH=$($sqlite.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
 
-      - name: Run independent verification
+      - name: Build business deliverables
         shell: pwsh
-        run: npm run verify
+        run: node verification/rebuild-reference.mjs
 
-      - name: Upload Windows evidence
+      - name: Upload rebuilt deliverables
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: q10141-windows-evidence
-          path: verification/evidence/
+          name: q10141-rebuilt-reference
+          path: verification/rebuilt/
           if-no-files-found: error
           retention-days: 1

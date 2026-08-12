@@ -1,15 +1,42 @@
 {
   "schema_version": 1,
   "result": "PASS",
+  "scanned_sources": 195,
+  "violations": [],
+  "score_answer_leakage_matches": [],
+  "answer_sheets": [
+    "交付物答案清单",
+    "固定字段答案",
+    "固定集合答案",
+    "固定数值答案",
+    "允许变体答案"
+  ],
+  "specification_sheets": [
+    "任务规格转化"
+  ],
+  "task_spec_row_count": 18,
+  "task_spec_column_count": 2,
   "task_asset_id": "sqlite_experiment_attribution_decision",
-  "humanizer_score": 47,
-  "online_ai_detection_used_as_conclusion": false,
-  "checks": {
-    "natural_language_boundary_violations": 0,
-    "natural_language_quotes": 0,
-    "answer_sheet_count": 5,
-    "specification_column_count": 2,
-    "reference_member_count": 5,
-    "business_input_count": 3
-  }
+  "forbidden_spec_labels": [],
+  "declared_delivery_paths": [
+    "output/ab_attribution_review.db",
+    "output/rebuild_ab_attribution.sql",
+    "output/reports/attribution_window.csv",
+    "output/reports/cohort_metrics.csv",
+    "output/reports/sample_contamination.csv"
+  ],
+  "reference_paths": [
+    "output/ab_attribution_review.db",
+    "output/rebuild_ab_attribution.sql",
+    "output/reports/attribution_window.csv",
+    "output/reports/cohort_metrics.csv",
+    "output/reports/sample_contamination.csv"
+  ],
+  "business_inputs": [
+    "input_data/database/ab_experiment.db",
+    "input_data/rules/attribution_policy.json",
+    "input_data/rules/report_layout.csv"
+  ],
+  "business_inputs_present": true,
+  "online_ai_detector_used_as_conclusion": false
 }
