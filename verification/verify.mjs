@@ -201,7 +201,7 @@ async function compareReference(outputRoot, reference) {
       assert(JSON.stringify(schemaA) === JSON.stringify(schemaB), `${table}结构与Reference不一致`);
       const rowsA = (await query(path.join(outputRoot, 'ab_attribution_review.db'), `SELECT * FROM ${table};`)).toSorted((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b), 'en'));
       const rowsB = (await query(referenceDb, `SELECT * FROM ${table};`)).toSorted((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b), 'en'));
-      assert(JSON.stringify(rowsA) === JSON.stringify(rowsB), `${table}数据与Reference不一致`);
+      assert(JSON.stringify(rowsA) === JSON.stringify(rowsB), `${table}数据与Reference不一致\n实际：${JSON.stringify(rowsA)}\nReference：${JSON.stringify(rowsB)}`);
       semantic.update(JSON.stringify(rowsA));
     }
     const integrityA = await query(path.join(outputRoot, 'ab_attribution_review.db'), 'PRAGMA integrity_check;');
