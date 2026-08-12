@@ -1,4 +1,7 @@
+总分：100分
+
 检查项：交付路径与SQLite数据库
+分值：14分
 标准答案：题面声明的归因数据库、完成版SQL和业务报表均位于指定路径，数据库可由SQLite读取。
 关键字段：output/ab_attribution_review.db；output/rebuild_ab_attribution.sql；output/reports目录。
 容差：路径和扩展名不设容差；CSV允许LF或CRLF行尾及必要转义。
@@ -10,6 +13,7 @@
 所属层级：L7产物结构或Schema或专业对象层
 
 检查项：源数据保护与规则消费
+分值：14分
 标准答案：输入库中的业务源表在交付库中保持逐行一致；report_meta保存attribution_policy.json中的报告区间与转化窗口；业务报表按report_layout.csv导出。
 关键字段：experiment_catalog；user_dimension；assignment_event；exposure_event；conversion_event；report_meta；attribution_policy.json；report_layout.csv。
 容差：源表结构、主键和行值不设容差；策略时间与窗口按输入文本精确比较；CSV行尾差异不计分。
@@ -21,6 +25,7 @@
 所属层级：L3输入数据导入与完整性层
 
 检查项：曝光去重与污染隔离
+分值：20分
 标准答案：曝光先按attribution_policy.json声明的业务键和顺序归并；每条曝光再按互斥实验族、重复会话、用户状态、机器人标记和时间区间裁决，首个命中的原因写入sample_contamination，其余记录进入valid_exposure。
 关键字段：exposure_event.exposure_id、user_id、experiment_id、session_id和exposed_at_utc；assignment_event；experiment_catalog.family_key；user_dimension；valid_exposure；sample_contamination.source_id、reason和detail。
 容差：主键和原因枚举不设容差；集合按exposure_id比较，行序不计分；原因顺序来自contamination_reason_priority。
@@ -32,6 +37,7 @@
 所属层级：L4数据清洗与质量控制层
 
 检查项：逐转化归因
+分值：22分
 标准答案：attribution_window覆盖conversion_event中的每条转化。候选曝光按user_id与metric_name匹配，且时间不晚于转化；互斥污染优先拦截，否则选择最近有效曝光，并依conversion_window_hours区分归因、窗口外和无先前曝光状态。
 关键字段：conversion_id、user_id、matched_exposure_id、experiment_id、variant、attribution_status、latency_minutes和value_cents。
 容差：延迟按UTC整分钟计算，数值容差为0；窗口来自attribution_policy.json；空匹配在数据库中使用NULL并在CSV中保留空值。
@@ -43,6 +49,7 @@
 所属层级：L6领域计算与专业规则层
 
 检查项：实验分组指标
+分值：20分
 标准答案：cohort_metrics按experiment_id与variant汇总有效曝光、归因转化和revenue_cents；conversion_rate_pct等于归因转化数除以有效曝光数再乘100。
 关键字段：experiment_id、variant、valid_exposures、attributed_conversions、revenue_cents和conversion_rate_pct。
 容差：计数和美分容差为0，百分比容差为0.01；指标由valid_exposure与attribution_window复算。
@@ -54,6 +61,7 @@
 所属层级：L6领域计算与专业规则层
 
 检查项：数据库与报表对账
+分值：10分
 标准答案：各业务CSV的文件名、字段顺序和排序遵守report_layout.csv，并与数据库中对应派生表按合同业务主键逐字段一致。
 关键字段：report_layout.csv中的report_file、source_table、columns和order_by；cohort_metrics；sample_contamination；attribution_window；output/reports目录。
 容差：允许必要CSV引号及LF或CRLF行尾；数值按上游评分项容差比较；空值语义必须一致。
