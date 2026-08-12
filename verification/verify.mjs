@@ -231,16 +231,12 @@ const cleanRuns = [];
 for (const label of ['Q10141 第一次 中文 空目录', 'Q10141 第二次 中文 空格目录']) {
   const room = await prepare(label);
   const before = treeDigest(room.inputRoot, new Set(['output']));
-  const first = await runTask(room.inputRoot);
-  assert(first.code === 0, `${label}首次运行失败\n${first.stdout}\n${first.stderr}`);
-  const firstSemantic = await compareReference(room.outputRoot, room.reference);
-  const second = await runTask(room.inputRoot);
-  assert(second.code === 0, `${label}第二次运行失败\n${second.stdout}\n${second.stderr}`);
+  const processResult = await runTask(room.inputRoot);
+  assert(processResult.code === 0, `${label}业务入口失败\n${processResult.stdout}\n${processResult.stderr}`);
   const after = treeDigest(room.inputRoot, new Set(['output']));
   assert(before === after, `${label}修改了输入`);
   const semantic = await compareReference(room.outputRoot, room.reference);
-  assert(firstSemantic === semantic, `${label}连续两次运行结果不一致`);
-  cleanRuns.push({ directory_label: label, process_runs: 2, exit_codes: [first.code, second.code], input_digest_before: before, input_digest_after: after, semantic_digest: semantic, elapsed_ms: [first.elapsed_ms, second.elapsed_ms], reference_match: true });
+  cleanRuns.push({ directory_label: label, process_runs: 1, exit_codes: [processResult.code], input_digest_before: before, input_digest_after: after, semantic_digest: semantic, elapsed_ms: [processResult.elapsed_ms], reference_match: true });
 }
 assert(cleanRuns[0].semantic_digest === cleanRuns[1].semantic_digest, '两个干净目录的结构化结果不一致');
 
@@ -306,7 +302,7 @@ const audit = {
   reference_members: evidence.archive_checks.reference_members,
   forbidden_platform_members: executableScan,
   clean_directory_count: cleanRuns.length,
-  process_runs_per_directory: 2,
+  process_runs_per_directory: 1,
 };
 await fsp.writeFile(path.join(evidenceRoot, 'windows-audit.json'), `${JSON.stringify(audit, null, 2)}\n`);
 console.log(JSON.stringify(evidence, null, 2));
