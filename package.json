@@ -1,0 +1,11 @@
+{
+  "name": "ale-q10141-windows-repro",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "verify": "node verification/verify.mjs"
+  }
+}

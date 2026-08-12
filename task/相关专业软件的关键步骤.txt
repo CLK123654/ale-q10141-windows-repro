@@ -1,0 +1,8 @@
+1. 使用sqlite3打开database/ab_experiment.db，检查experiment_catalog、user_dimension、assignment_event、exposure_event和conversion_event的结构与关系。
+2. 从attribution_policy.json读取报告区间、转化窗口和污染原因顺序，将运行值载入SQLite临时合同表。
+3. 用ROW_NUMBER按user_id、experiment_id和session_id排列曝光，按时间与exposure_id保留首条。
+4. 关联assignment_event与experiment_catalog计算每个用户在family_key下的实验数，并依策略顺序写入sample_contamination。
+5. 从未进入污染表的曝光建立valid_exposure，保留实验族、指标、分组和原始时间字段。
+6. 将conversion_event按user_id与metric_name关联候选曝光，用窗口排序选择转化前最近记录并计算分钟延迟。
+7. 按污染优先级和conversion_window_hours写入attribution_window，再按experiment_id与variant生成cohort_metrics。
+8. 依据report_layout.csv调用sqlite3的CSV输出，从派生表导出三张报表并核对业务排序。
